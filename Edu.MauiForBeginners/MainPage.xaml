@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Edu.MauiForBeginners.MainPage"
+             xmlns:viewmodel="clr-namespace:Edu.MauiForBeginners.ViewModels"
+             x:DataType="viewmodel:MainViewModel">
+    <ContentPage.BindingContext>
+        <viewmodel:MainViewModel x:Name="VM" />
+    </ContentPage.BindingContext>
+
+    <Grid RowDefinitions="100, Auto, *"
+          ColumnDefinitions=".75*, .15*"
+          Padding="10"
+          RowSpacing="10"
+          ColumnSpacing="10">
+
+        <Image Grid.ColumnSpan="2"
+               Source="dotnet_bot.png"
+               BackgroundColor="Transparent">
+               
+        </Image>
+
+        <Entry Placeholder="Enter task"
+               Text="{Binding Text}"
+               Grid.Row="1"/>
+        <Button Text="Add"
+                Grid.Row="1"
+                Grid.Column="1"
+                Command="{Binding AddCommand}"></Button>
+
+        <CollectionView Grid.Row="2" Grid.ColumnSpan="2"
+                        ItemsSource="{Binding Items}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type x:String}">
+                    <SwipeView>
+                        <SwipeView.RightItems>
+                            <SwipeItem Text="Delete" 
+                                       BackgroundColor="Red"
+                                       Command="{Binding Source={x:Reference VM}, Path=DeleteCommand}"
+                                       CommandParameter="{Binding .}">				
+                            </SwipeItem>                            
+                        </SwipeView.RightItems>
+                        <Grid Padding="0.5">
+                            <Frame>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1"
+                                                          Command="{Binding Source={x:Reference VM}, Path=TapCommand}"
+                                                          CommandParameter="{Binding .}">                                        
+                                    </TapGestureRecognizer>
+                                </Frame.GestureRecognizers>
+                                <Label Text="{Binding .}" FontSize="24"></Label>
+                            </Frame>
+                        </Grid>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+
+</ContentPage>
