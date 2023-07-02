@@ -19,11 +19,10 @@ namespace Edu.MauiForBeginners.ViewModels
         }
 
         [ObservableProperty]
-        ObservableCollection<string> _items;
-
+        ObservableCollection<string> items;
 
         [ObservableProperty]
-        string _text;
+        string text;
 
         [RelayCommand]
         async Task Add()
@@ -55,6 +54,12 @@ namespace Edu.MauiForBeginners.ViewModels
         async Task Tap(string s)
         {
             await Shell.Current.GoToAsync($"{nameof(DetailPage)}?Text={s}", true);
+        }
+
+        [RelayCommand]
+        async Task Login()
+        {
+            await Shell.Current.GoToAsync($"{nameof(LoginPage)}");
         }
     }
 }

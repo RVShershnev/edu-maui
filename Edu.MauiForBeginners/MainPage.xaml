@@ -55,6 +55,14 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+        <VerticalStackLayout>
+            <Button Text="Login" 
+                    Command="{Binding Source={x:Reference VM}, Path=LoginCommand}">                
+            </Button>
+            <Button Text="Login" 
+                    Command="{Binding Source={x:Reference VM}, Path=LoginCommand}">
+            </Button>
+        </VerticalStackLayout>
     </Grid>
 
 </ContentPage>
